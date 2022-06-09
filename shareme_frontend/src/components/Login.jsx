@@ -1,15 +1,42 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { signInWithGoogle } from "../firebase/firebase";
-
+import { auth,provider } from "../firebase/firebase";
+import { signInWithPopup } from "firebase/auth";
+import { client } from "../client";
 import shareVideo from "../assets/share.mp4";
 import backgroud from "../assets/loginBackground.jpg";
 import logo from "../assets/logo.png";
 function Login() {
-  const responseGoogle = (response) => {
-    console.log(response);
+
+  const navigate = useNavigate();
+   const SignInWithGoogle = () => {
+    
+    signInWithPopup(auth, provider)
+      .then((result) => {
+  
+        localStorage.setItem('user',JSON.stringify(result.user))
+        const {displayName,uid, photoURL } = result.user
+        console.log(displayName + ": "+ uid+ ": "+ photoURL);
+  
+        const doc = {
+          _id : uid,
+          _type : 'user',
+          userName: displayName,
+          image: photoURL
+        }
+        console.log(doc);
+        client.createIfNotExists(doc)
+        .then(()=>{
+          console.log("done")
+          navigate('/',{replace : true})
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
+  
 
  
 
@@ -34,7 +61,7 @@ function Login() {
             <button
               type="button"
               className="bg-mainColor flex justify-center p-3 rounded-lg cursor-pointer outline-none "
-              onClick={signInWithGoogle}
+              onClick={SignInWithGoogle}
             >
               <FcGoogle className="mr-4" />
               Sign in with Google

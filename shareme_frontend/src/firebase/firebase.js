@@ -1,11 +1,11 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { useNavigate } from "react-router-dom";
+
+import { client } from "../client";
+
 const firebaseConfig = {
   apiKey: "AIzaSyB1lP22FCEfGyrKgLBWZdUJoUyLr30KTjw",
   authDomain: "pinterest-app-352709.firebaseapp.com",
@@ -18,15 +18,34 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
 export const auth = getAuth(app);
 
-const provider = new GoogleAuthProvider();
-export const signInWithGoogle = () => {
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      console.log(result);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+export const provider = new GoogleAuthProvider();
+
+// export const SignInWithGoogle = ({nav}) => {
+    
+//   const navigate = useNavigate();
+
+//   signInWithPopup(auth, provider)
+//     .then((result) => {
+
+//       //localStorage.setItem('user',JSON.stringify(result.user))
+//       const {displayName,uid, photoURL } = result.user.providerData[0]
+//       console.log(displayName + ": "+ uid+ ": "+ photoURL);
+
+//       const doc = {
+//         _id : uid,
+//         _type : 'user',
+//         _userName: displayName,
+//         image: photoURL
+//       }
+//       client.createIfNotExists(doc)
+//       .then(()=>{
+//         navigate('/',{replace : true})
+//       })
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// };
