@@ -14,7 +14,6 @@ function Login() {
     
     signInWithPopup(auth, provider)
       .then((result) => {
-  
         localStorage.setItem('user',JSON.stringify(result.user))
         const {displayName,uid, photoURL } = result.user
         console.log(displayName + ": "+ uid+ ": "+ photoURL);
