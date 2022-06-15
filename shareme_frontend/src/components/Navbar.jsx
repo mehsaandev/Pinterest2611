@@ -26,7 +26,6 @@ const Navbar = ({ searchTerm, setSearchTerm, user }) => {
             <IoMdAdd/>
         </Link>
       </div>
-
     </div>
   );
 };

@@ -15,6 +15,11 @@ export default {
       type: "string",
     },
     {
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+    },
+    {
       name: "destination",
       title: "Destination",
       type: "url",
