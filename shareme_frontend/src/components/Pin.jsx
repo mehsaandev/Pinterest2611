@@ -14,7 +14,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
 
   const user = fetchUser();
 
-  const alreadySaved = !!save?.filter((item) => item.postedBy._id === user.uid)
+  const alreadySaved = !!save?.filter((item) => item.postedBy?._id === user?.uid)
     ?.length;
 
   console.log(alreadySaved);
@@ -111,7 +111,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                   {destination.slice(8, 17)}
                 </a>
               )}
-              {postedBy?._id === user.uid && (
+              {postedBy?._id === user?.uid && (
                 <button
                   className="bg-white p-2 rounded-full w-8 h-8 flex items-center justify-center text-dark opacity-75 hover:opacity-100 outline-none"
                   type="button"

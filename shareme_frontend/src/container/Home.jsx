@@ -47,11 +47,14 @@ function Home() {
             <img src={logo} alt="logo" className="w-28 mt-2" />
           </Link>
           <Link to={`user-profile/${user?._id}`}>
+          {user && (
             <img
               src={user?.image}
               alt="user-pic"
               className="w-9 h-9 rounded-full "
             />
+            )}
+           
           </Link>
         </div>
         {toggleSidebar && (
